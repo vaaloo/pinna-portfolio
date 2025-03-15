@@ -1,0 +1,60 @@
+.navbar {
+  background: #000;
+  color: #fff;
+  display: flex;
+  justify-content: space-between;
+  padding: .7rem 60px;
+  align-items: center;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.navbar h1 {
+  color: #FFF;
+  font-size: 26px;
+  font-weight: 700;
+}
+
+.navbar nav ul {
+  display: flex;
+  flex-direction: row;
+}
+
+.navbar nav ul li {
+  list-style: none;
+}
+
+.navbar nav ul li a {
+  color: #fff;
+  text-decoration: none;
+  margin: 0 15px;
+  font-size: 20px;
+  font-weight: 400;
+  position: relative;
+
+  &:after {
+    content: '';
+    display: block;
+    position: absolute;
+    bottom: -5px;
+    left: 50%;
+    width: 0;
+    height: 1px;
+    background: #fff;
+    transition: width .3s, left .3s;
+    transform: translateX(-50%);
+  }
+
+  &:hover:after {
+    width: 100%;
+  }
+
+  &.active:after {
+    width: 100%;
+  }
+}
+
+.insta_icon {
+  color: white;
+  width: 45px;
+  height: 45px;
+}
