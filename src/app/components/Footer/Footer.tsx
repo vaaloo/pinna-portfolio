@@ -1,11 +1,16 @@
 import styles from "./Footer.module.scss";
 import Link from "next/link";
 
-const Footer: React.FC = () => {
+interface FooterProps {
+    abs: boolean;
+}
+
+const Footer: React.FC<FooterProps> = ({abs = false}) => {
+    const currentYear = new Date().getFullYear();
     return (
-        <footer className={styles.footer}>
+        <footer className={abs ? styles.footer_abs : styles.footer}>
             <p>Made by <Link href={'https://vaaloo.fr'}>Valoo</Link></p>
-            <p>© Copyright 2025</p>
+            <p>© Copyright {currentYear}</p>
         </footer>
     )
 }

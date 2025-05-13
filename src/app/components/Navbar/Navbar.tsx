@@ -1,32 +1,72 @@
+'use client';
+
 import Link from "next/link";
-import {FaInstagram} from "react-icons/fa";
+import { usePathname } from "next/navigation";
+import { useState } from "react";
+import { FaInstagram, FaBars, FaTimes } from "react-icons/fa";
 import styles from "./Navbar.module.scss";
-import {usePathname} from "next/navigation";
 
 const Navbar: React.FC = () => {
-    const route = usePathname();
+    const pathname = usePathname();
+    const [menuOpen, setMenuOpen] = useState(false);
+
+    const toggleMenu = () => setMenuOpen(prev => !prev);
+    const closeMenu = () => setMenuOpen(false);
+
     return (
-        <div className={styles.navbar}>
-            <h1>Antoine PINNA</h1>
-            <nav>
+        <header className={styles.navbar}>
+            <div className={styles.left}>
+                <h1 className={styles.title}>Antoine PINNA</h1>
+            </div>
+
+            <nav className={`${styles.center} ${menuOpen ? styles.hidden : ''}`}>
                 <ul>
                     <li>
-                        <Link href={"/"} className={route === '/' ? styles.active : ''}>Accueil</Link>
+                        <Link href="/" className={pathname === "/" ? styles.activeLink : ""}>Accueil</Link>
                     </li>
                     <li>
-                        <Link href={"/projects"} className={route === '/projects' ? styles.active : ''}>Projets</Link>
+                        <Link href="/projects" className={pathname.includes("/projects") ? styles.activeLink : ""}>Projets</Link>
                     </li>
                     <li>
-                        <Link href={"/contact"} className={route === '/contact' ? styles.active : ''}>Contact</Link>
-                    </li>
-                    <li>
-                        <Link href={'/others'} className={route === '/others' ? styles.active : ''}>Autres</Link>
+                        <Link href="/contact" className={pathname === "/contact" ? styles.activeLink : ""}>Contact</Link>
                     </li>
                 </ul>
             </nav>
-            <FaInstagram className={styles.insta_icon}/>
-        </div>
+
+            <div className={styles.right}>
+                <a
+                    href="https://instagram.com"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className={`${styles.insta_icon} ${menuOpen ? styles.hidden : ''}`}
+                >
+                    <FaInstagram />
+                </a>
+                <button className={styles.burger} onClick={toggleMenu}>
+                    {menuOpen ? <FaTimes /> : <FaBars />}
+                </button>
+            </div>
+
+            {menuOpen && (
+                <div className={styles.mobileMenu}>
+                    <ul>
+                        <li>
+                            <Link href="/" onClick={closeMenu} className={pathname === "/" ? styles.activeLink : ""}>Accueil</Link>
+                        </li>
+                        <li>
+                            <Link href="/projects" onClick={closeMenu} className={pathname.includes("/projects") ? styles.activeLink : ""}>Projets</Link>
+                        </li>
+                        <li>
+                            <Link href="/contact" onClick={closeMenu} className={pathname === "/contact" ? styles.activeLink : ""}>Contact</Link>
+                        </li>
+                    </ul>
+                    <a href="https://instagram.com" target="_blank" rel="noopener noreferrer">
+                        <FaInstagram className={styles.mobileInsta} />
+                    </a>
+                </div>
+            )}
+        </header>
     );
-}
+};
 
 export default Navbar;

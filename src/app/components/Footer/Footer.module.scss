@@ -1,4 +1,4 @@
-.footer {
+.footer, .footer_abs {
   background: #000;
   color: white;
   display: flex;
@@ -12,4 +12,10 @@
     color: white;
     font-weight: 700;
   }
+}
+
+.footer_abs {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
 }

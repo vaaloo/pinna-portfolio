@@ -3,58 +3,155 @@
   color: #fff;
   display: flex;
   justify-content: space-between;
-  padding: .7rem 60px;
   align-items: center;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  padding: 0.7rem 60px;
+  position: relative;
+  flex-wrap: wrap;
 }
 
-.navbar h1 {
-  color: #FFF;
+.left {
+  flex: 1;
+}
+
+.title {
   font-size: 26px;
   font-weight: 700;
-}
-
-.navbar nav ul {
-  display: flex;
-  flex-direction: row;
-}
-
-.navbar nav ul li {
-  list-style: none;
-}
-
-.navbar nav ul li a {
   color: #fff;
-  text-decoration: none;
-  margin: 0 15px;
-  font-size: 20px;
-  font-weight: 400;
-  position: relative;
+}
 
-  &:after {
-    content: '';
-    display: block;
-    position: absolute;
-    bottom: -5px;
-    left: 50%;
-    width: 0;
-    height: 1px;
-    background: #fff;
-    transition: width .3s, left .3s;
-    transform: translateX(-50%);
-  }
+.center {
+  flex: 2;
+  display: flex;
+  justify-content: center;
 
-  &:hover:after {
-    width: 100%;
-  }
+  ul {
+    display: flex;
+    gap: 30px;
+    list-style: none;
+    margin: 0;
+    padding: 0;
 
-  &.active:after {
-    width: 100%;
+    li a {
+      color: #fff;
+      text-decoration: none;
+      font-size: 20px;
+      font-weight: 400;
+      position: relative;
+
+      &::after {
+        content: '';
+        position: absolute;
+        bottom: -5px;
+        left: 50%;
+        width: 0;
+        height: 1px;
+        background: #fff;
+        transform: translateX(-50%);
+        transition: width 0.3s ease;
+      }
+
+      &:hover::after,
+      &.activeLink::after {
+        width: 100%;
+      }
+    }
   }
+}
+
+@media (max-width: 768px) {
+  .center {
+    display: none;
+  }
+}
+
+.right {
+  flex: 1;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 20px;
 }
 
 .insta_icon {
   color: white;
-  width: 45px;
-  height: 45px;
+  font-size: 28px;
+  display: block;
+
+  @media (max-width: 768px) {
+    display: none;
+  }
+}
+
+.burger {
+  background: none;
+  border: none;
+  color: white;
+  font-size: 28px;
+  cursor: pointer;
+  display: none;
+  transition: transform 0.3s ease;
+
+  @media (max-width: 768px) {
+    display: block;
+  }
+}
+
+/* Animation keyframes */
+@keyframes slideFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideFadeOut {
+  from {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  to {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+}
+
+.mobileMenu {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 100%;
+  background: #000;
+  padding: 20px 40px;
+  z-index: 1000;
+  animation: slideFadeIn 0.3s ease forwards;
+
+  ul {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+
+    li a {
+      color: #fff;
+      font-size: 18px;
+      text-decoration: none;
+    }
+  }
+}
+
+.mobileInsta {
+  margin-top: 20px;
+  font-size: 26px;
+  color: white;
+  display: block;
+}
+
+.hidden {
+  display: none !important;
 }

@@ -55,7 +55,7 @@ const Home: NextPage = () => {
                     </div>
                 </div>
             </main>
-            <Footer></Footer>
+            <Footer abs={false} />
         </>
     );
 }

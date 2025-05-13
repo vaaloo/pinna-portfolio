@@ -4,54 +4,52 @@ import Navbar from "@/app/components/Navbar/Navbar";
 import Image from "next/image";
 import styles from "./Projects.module.scss";
 import Footer from "@/app/components/Footer/Footer";
+import { useRouter } from "next/navigation";
+
+const projectList = [
+    { title: "Maison PMR", image: "/images/pmr.png", path: "/projects/pmr" },
+    { title: "Éco Quartier", image: "/images/eco.png", path: "/projects/eco" },
+    { title: "Rénovation", image: "/images/renov.png", path: "/projects/renov" },
+    { title: "Hackaton", image: "/images/hackathon.png", path: "/projects/hackathon" },
+];
 
 const Projects: React.FC = () => {
+    const router = useRouter();
+
     return (
         <>
-            <div>
-                <Navbar/>
-                <div className={styles.projects}>
-                    <div className={styles.project}>
-                        <Image
-                            src={'/images/pmr.png'}
-                            alt={'projet pmr'}
-                            width={500}
-                            height={300}
-                        ></Image>
-                        <h2>Maison PMR</h2>
-                    </div>
-                    <div className={styles.project}>
-                        <Image
-                            src={'/images/eco.png'}
-                            alt={'projet pmr'}
-                            width={500}
-                            height={300}
-                        ></Image>
-                        <h2>Éco Quartier</h2>
-                    </div>
-                    <div className={styles.project}>
-                        <Image
-                            src={'/images/renov.png'}
-                            alt={'projet pmr'}
-                            width={500}
-                            height={300}
-                        ></Image>
-                        <h2>Rénovation</h2>
-                    </div>
-                    <div className={styles.project}>
-                        <Image
-                            src={'/images/hackaton.png'}
-                            alt={'projet pmr'}
-                            width={500}
-                            height={300}
-                        ></Image>
-                        <h2>Hackaton</h2>
+            <Navbar />
+            <main className={styles.container}>
+                <h1 className={styles.heading}>Mes projets</h1>
+                <div className={styles.grid}>
+                    {projectList.map((project, index) => (
+                        <div
+                            key={index}
+                            className={styles.card}
+                            onClick={() => router.push(project.path)}
+                        >
+                            <div className={styles.imageWrapper}>
+                                <Image
+                                    src={project.image}
+                                    alt={`Image de ${project.title}`}
+                                    width={600}
+                                    height={400}
+                                    className={styles.image}
+                                />
+                                <div className={styles.overlay}>
+                                    <h2>{project.title}</h2>
+                                </div>
+                            </div>
+                        </div>
+                    ))}
+                    <div className={styles.others}>
+                        <h2>Autres projets</h2>
                     </div>
                 </div>
-            </div>
-            <Footer/>
+            </main>
+            <Footer abs={false} />
         </>
     );
-}
+};
 
 export default Projects;
