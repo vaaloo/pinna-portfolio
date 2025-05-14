@@ -7,9 +7,23 @@
 .heading {
   font-size: 2.5rem;
   font-weight: 700;
-  margin-bottom: 40px;
   text-align: center;
+  margin: 20px auto 40px;
   color: #111;
+  position: relative;
+  width: 250px;
+
+  &::after {
+    content: "";
+    width: 50%;
+    position: absolute;
+    height: 5px;
+    background: rgb(41, 41, 41);
+    border-radius: 10px;
+    bottom: -7px;
+    left: 50%;
+    transform: translateX(-50%);
+  }
 }
 
 .grid {
